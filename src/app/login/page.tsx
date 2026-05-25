@@ -8,7 +8,7 @@ import { mapApiError } from "@/lib/axios";
 import type { Login } from "@/lib/validators";
 import { loginSchema } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import React, { Suspense } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
@@ -34,7 +34,6 @@ function Login() {
   const [error, setError] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const router = useRouter();
   const { refetchUser } = useAuth();
 
   const searchParams = useSearchParams();
@@ -53,7 +52,7 @@ function Login() {
       await login(data);
       await refetchUser();
       toast.success("Login successful");
-      router.push("/dashboard");
+      window.location.assign("/dashboard");
     } catch (err: unknown) {
       const parsedError = mapApiError(err, {
         badRequest: "Invalid email or password.",
