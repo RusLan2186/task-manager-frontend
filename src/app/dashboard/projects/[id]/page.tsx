@@ -7,6 +7,7 @@ import {
   TaskFilters,
   Title,
 } from "@/components";
+import { useAuth } from "@/context/AuthContext";
 import { useProject } from "@/hooks/useProject";
 import { useTasks } from "@/hooks/useTasks";
 import { useUsers } from "@/hooks/useUsers";
@@ -18,6 +19,7 @@ export default function ProjectPage() {
   const searchParams = useSearchParams();
   const params = useParams<{ id: string | string[] }>();
   const projectId = Array.isArray(params?.id) ? params.id[0] : params?.id;
+  const { user } = useAuth();
   const { users } = useUsers();
   const search = searchParams.get("search") ?? "";
   const priorityValue = searchParams.get("priority") ?? "ALL";
@@ -31,6 +33,12 @@ export default function ProjectPage() {
 
   const [searchValue, setSearchValue] = React.useState(search);
   const { project } = useProject(projectId ?? "");
+  const availableUsers = React.useMemo(() => {
+    if (!user) return users;
+
+    const hasCurrentUser = users.some((item) => item.id === user.id);
+    return hasCurrentUser ? users : [user, ...users];
+  }, [user, users]);
 
   const handleSearch = React.useRef(
     debounce((value: string) => {
@@ -89,7 +97,7 @@ export default function ProjectPage() {
           <CreateTaskDialog
             projectId={projectId}
             onTaskCreated={fetchTasks}
-            users={users}
+            users={availableUsers}
           />
         </div>
       </section>
@@ -111,7 +119,7 @@ export default function ProjectPage() {
 
         {(tasks.length > 0 || hasActiveFilters) && (
           <TaskFilters
-            users={users}
+            users={availableUsers}
             handleFilterChange={handleFilterChange}
             priorityValue={priorityValue}
             assigneeIdValue={assigneeIdValue}
@@ -145,7 +153,7 @@ export default function ProjectPage() {
               <CreateTaskDialog
                 projectId={projectId}
                 onTaskCreated={fetchTasks}
-                users={users}
+                users={availableUsers}
               />
             )}
           </div>
@@ -158,7 +166,7 @@ export default function ProjectPage() {
             projectId={projectId}
             onTaskUpdated={fetchTasks}
             ownerId={project?.ownerId}
-            users={users}
+            users={availableUsers}
           />
         </div>
       )}
