@@ -9,14 +9,15 @@ export const useUsers = (search?: string, enabled = true) => {
   const [users, setUsers] = React.useState<User[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  const [errorStatus, setErrorStatus] = React.useState<number | null>(null);
   const router = useRouter();
-
 
   const fetchUsers = React.useCallback(async () => {
     if (!enabled) return;
 
     setIsLoading(true);
     setError(null);
+    setErrorStatus(null);
     try {
       const response = await getUsers(search);
       setUsers(response);
@@ -26,9 +27,8 @@ export const useUsers = (search?: string, enabled = true) => {
         return;
       }
 
-      if (error instanceof AxiosError && error.response?.status === 403) {
-        router.push("/dashboard");
-        return;
+      if (error instanceof AxiosError) {
+        setErrorStatus(error.response?.status ?? null);
       }
 
       console.error("Error fetching users:", error);
@@ -39,11 +39,7 @@ export const useUsers = (search?: string, enabled = true) => {
   }, [enabled, router, search]);
 
   React.useEffect(() => {
-    if (!enabled) {
-      setUsers([]);
-      setIsLoading(false);
-      return;
-    }
+    if (!enabled) return;
 
     const timeoutId = window.setTimeout(() => {
       void fetchUsers();
@@ -54,5 +50,10 @@ export const useUsers = (search?: string, enabled = true) => {
     };
   }, [enabled, fetchUsers]);
 
-  return { users, isLoading, error };
+  return {
+    users: enabled ? users : [],
+    isLoading: enabled ? isLoading : false,
+    error: enabled ? error : null,
+    errorStatus: enabled ? errorStatus : null,
+  };
 };

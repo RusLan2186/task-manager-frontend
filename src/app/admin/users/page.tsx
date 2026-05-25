@@ -13,7 +13,7 @@ export default function AdminUsersPage() {
   const router = useRouter();
   const { user, isLoading: authLoading } = useAuth();
   const canViewUsers = user?.role === "ADMIN";
-  const { users, isLoading } = useUsers(search, canViewUsers);
+  const { users, isLoading, errorStatus } = useUsers(search, canViewUsers);
 
   React.useEffect(() => {
     if (authLoading) return;
@@ -27,6 +27,12 @@ export default function AdminUsersPage() {
       router.push("/dashboard");
     }
   }, [authLoading, router, user]);
+
+  React.useEffect(() => {
+    if (errorStatus === 403) {
+      router.push("/dashboard");
+    }
+  }, [errorStatus, router]);
 
   if (authLoading || !user || !canViewUsers) {
     return <p className="text-muted-foreground">Loading...</p>;
