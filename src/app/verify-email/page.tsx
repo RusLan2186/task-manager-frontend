@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import { Button, Input } from "@/components/ui";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -7,7 +7,15 @@ import { verifyEmail } from "@/lib/api/auth.api";
 import { mapApiError } from "@/lib/axios";
 import { toast } from "sonner";
 
-export default function VerifyEmail() {
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyEmail />
+    </Suspense>
+  );
+}
+
+function VerifyEmail() {
   const {
     register,
     handleSubmit,

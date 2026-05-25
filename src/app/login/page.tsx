@@ -9,12 +9,20 @@ import type { Login } from "@/lib/validators";
 import { loginSchema } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { toast } from "sonner";
 
-export default function Login() {
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Login />
+    </Suspense>
+  );
+}
+
+function Login() {
   const {
     register,
     handleSubmit,

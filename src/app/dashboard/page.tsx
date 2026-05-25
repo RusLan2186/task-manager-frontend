@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Title } from "@/components";
 import { CreateProjectDialog } from "@/components/CreateProjectDialog";
@@ -21,7 +21,16 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 
-export default function Dashboard() {
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Dashboard />
+    </Suspense>
+  );
+}
+
+ function Dashboard() {
   const { user, isLoading } = useAuth();
   const searchParams = useSearchParams();
   const router = useRouter();
