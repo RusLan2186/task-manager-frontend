@@ -24,6 +24,11 @@ export const useUsers = (search?: string) => {
         return;
       }
 
+      if (error instanceof AxiosError && error.response?.status === 403) {
+        router.push("/dashboard");
+        return;
+      }
+
       console.error("Error fetching users:", error);
       setError("Could not load users. Please try again.");
     } finally {

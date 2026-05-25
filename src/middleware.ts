@@ -4,15 +4,21 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
 
-  if (!token) {
-   return NextResponse.redirect(new URL("/login", request.nextUrl.origin));
-  }
-
   if (request.nextUrl.pathname.startsWith("/admin")) {
-    const decoded = jwtDecode<{ role: string }>(token);
+    if (!token) {
+      return NextResponse.next();
+    }
 
-    if (decoded.role !== "ADMIN") {
-      return NextResponse.redirect(new URL("/dashboard", request.nextUrl.origin));
+    try {
+      const decoded = jwtDecode<{ role: string }>(token);
+
+      if (decoded.role !== "ADMIN") {
+        return NextResponse.redirect(
+          new URL("/dashboard", request.nextUrl.origin),
+        );
+      }
+    } catch {
+      return NextResponse.next();
     }
   }
 
