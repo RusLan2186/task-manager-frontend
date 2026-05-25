@@ -1,14 +1,36 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Title } from "@/components/Title";
 import { Input, Table } from "@/components/ui";
 
+import { useAuth } from "@/context/AuthContext";
 import { useUsers } from "@/hooks/useUsers";
 
 export default function AdminUsersPage() {
   const [search, setSearch] = React.useState("");
-  const { users } = useUsers(search);
+  const router = useRouter();
+  const { user, isLoading: authLoading } = useAuth();
+  const canViewUsers = user?.role === "ADMIN";
+  const { users, isLoading } = useUsers(search, canViewUsers);
+
+  React.useEffect(() => {
+    if (authLoading) return;
+
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+
+    if (user.role !== "ADMIN") {
+      router.push("/dashboard");
+    }
+  }, [authLoading, router, user]);
+
+  if (authLoading || !user || !canViewUsers) {
+    return <p className="text-muted-foreground">Loading...</p>;
+  }
 
   return (
     <div>
@@ -23,7 +45,13 @@ export default function AdminUsersPage() {
         />
       </div>
 
-      {users.length > 0 ? <Table users={users} /> : <h1>No users found</h1>}
+      {isLoading ? (
+        <p className="text-muted-foreground">Loading users...</p>
+      ) : users.length > 0 ? (
+        <Table users={users} />
+      ) : (
+        <h1>No users found</h1>
+      )}
     </div>
   );
 }

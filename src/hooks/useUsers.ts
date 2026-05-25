@@ -5,7 +5,7 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-export const useUsers = (search?: string) => {
+export const useUsers = (search?: string, enabled = true) => {
   const [users, setUsers] = React.useState<User[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
@@ -13,6 +13,8 @@ export const useUsers = (search?: string) => {
 
 
   const fetchUsers = React.useCallback(async () => {
+    if (!enabled) return;
+
     setIsLoading(true);
     setError(null);
     try {
@@ -34,9 +36,15 @@ export const useUsers = (search?: string) => {
     } finally {
       setIsLoading(false);
     }
-  }, [router, search]);
+  }, [enabled, router, search]);
 
   React.useEffect(() => {
+    if (!enabled) {
+      setUsers([]);
+      setIsLoading(false);
+      return;
+    }
+
     const timeoutId = window.setTimeout(() => {
       void fetchUsers();
     }, 0);
@@ -44,7 +52,7 @@ export const useUsers = (search?: string) => {
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, [fetchUsers]);
+  }, [enabled, fetchUsers]);
 
   return { users, isLoading, error };
 };
