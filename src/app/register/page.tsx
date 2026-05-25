@@ -116,7 +116,7 @@ export default function Register() {
         <div className="text-center flex flex-col gap-4">
           <a
             className="text-green-600 font-bold"
-            href="http://localhost:5000/auth/google"
+            href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}
           >
             <Button
               variant="outline"
@@ -129,7 +129,7 @@ export default function Register() {
 
           <a
             className="text-green-600 font-bold"
-            href="http://localhost:5000/auth/github"
+            href={`${process.env.NEXT_PUBLIC_API_URL}/auth/github`}
           >
             <Button
               variant="outline"

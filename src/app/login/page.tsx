@@ -111,7 +111,7 @@ export default function Login() {
       <div className="mt-4 text-center flex flex-col gap-4">
         <a
           className="text-green-600 font-bold"
-          href="http://localhost:5000/auth/google"
+          href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}
         >
           <Button variant="outline" className="w-full flex items-center gap-5">
             <Image src="/google.avif" alt="Google" width={20} height={20} />
@@ -121,7 +121,7 @@ export default function Login() {
 
         <a
           className="text-green-600 font-bold"
-          href="http://localhost:5000/auth/github"
+          href={`${process.env.NEXT_PUBLIC_API_URL}/auth/github`}
         >
           <Button variant="outline" className="w-full flex items-center gap-5">
             <Image src="/github.png" alt="Fithub" width={25} height={25} />
