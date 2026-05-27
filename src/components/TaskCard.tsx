@@ -1,6 +1,7 @@
 "use client";
 
 import { Task } from "@/types";
+import { User } from "@/types";
 import React from "react";
 import { Card } from "./ui";
 import { CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
@@ -8,12 +9,14 @@ import { useDraggable } from "@dnd-kit/core";
 
 interface Props {
   task: Task;
+  participants?: User[];
   isOverlay?: boolean;
   onClick?: () => void;
 }
 
 export const TaskCard: React.FC<Props> = ({
   task,
+  participants = [],
   isOverlay = false,
   onClick,
 }) => {
@@ -68,6 +71,30 @@ export const TaskCard: React.FC<Props> = ({
           <CardDescription className="line-clamp-3 text-xs">
             {task.description || "No description"}
           </CardDescription>
+
+          {participants.length > 0 && (
+            <div className="mt-3 flex items-center justify-between gap-2">
+              <p className="text-[11px] font-medium text-muted-foreground">
+                Participants
+              </p>
+              <div className="flex -space-x-1.5">
+                {participants.slice(0, 4).map((user) => (
+                  <span
+                    key={user.id}
+                    title={user.name}
+                    className="inline-flex size-6 items-center justify-center rounded-full border border-background bg-muted text-[10px] font-semibold text-foreground"
+                  >
+                    {user.name.slice(0, 1).toUpperCase()}
+                  </span>
+                ))}
+                {participants.length > 4 && (
+                  <span className="inline-flex size-6 items-center justify-center rounded-full border border-background bg-muted text-[10px] font-semibold text-muted-foreground">
+                    +{participants.length - 4}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
 
           {task.assignee && (
             <p className="mt-3 inline-flex items-center rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">

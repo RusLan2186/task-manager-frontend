@@ -1,16 +1,18 @@
-import { Task } from "@/types";
+import { Task, User } from "@/types";
 import { Title } from "./Title";
 import { useDroppable } from "@dnd-kit/core";
 import { TaskCard } from "./TaskCard";
 
 interface Props {
   tasks: Task[];
+  users: User[];
   status: "TODO" | "IN_PROGRESS" | "DONE";
   onTaskClick: (task: Task) => void;
 }
 
 export const KanbanColumn: React.FC<Props> = ({
   tasks,
+  users,
   status,
   onTaskClick,
 }) => {
@@ -67,6 +69,7 @@ export const KanbanColumn: React.FC<Props> = ({
             <TaskCard
               key={task.id}
               task={task}
+              participants={users}
               onClick={() => onTaskClick(task)}
             />
           ))}

@@ -181,18 +181,21 @@ export const KanbanBoard: React.FC<Props> = ({
         <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
           <KanbanColumn
             tasks={todoTasks}
+            users={users}
             status="TODO"
             onTaskClick={handleTaskClick}
           />
 
           <KanbanColumn
             tasks={inProgressTasks}
+            users={users}
             status="IN_PROGRESS"
             onTaskClick={handleTaskClick}
           />
 
           <KanbanColumn
             tasks={doneTasks}
+            users={users}
             status="DONE"
             onTaskClick={handleTaskClick}
           />
@@ -205,7 +208,7 @@ export const KanbanBoard: React.FC<Props> = ({
             className="scale-[1.01]"
             style={activeTaskWidth ? { width: activeTaskWidth } : undefined}
           >
-            <TaskCard task={activeTask} isOverlay />
+            <TaskCard task={activeTask} participants={users} isOverlay />
           </div>
         ) : null}
       </DragOverlay>

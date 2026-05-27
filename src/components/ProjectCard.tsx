@@ -20,6 +20,7 @@ interface Props {
 
 export const ProjectCard: React.FC<Props> = ({ project, removeProject }) => {
   const { user } = useAuth();
+  const canAccessTasks = project.canAccessTasks ?? true;
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       day: "numeric",
@@ -66,14 +67,26 @@ export const ProjectCard: React.FC<Props> = ({ project, removeProject }) => {
       </CardContent>
 
       <CardFooter className="flex gap-2 pt-2">
-        <Button
-          asChild
-          variant="outline"
-          className="w-full border-border/70 bg-background/80 text-sm transition-colors group-hover:bg-background"
-          size="sm"
-        >
-          <Link href={`/dashboard/projects/${project.id}`}>View tasks</Link>
-        </Button>
+        {canAccessTasks ? (
+          <Button
+            asChild
+            variant="outline"
+            className="w-full border-border/70 bg-background/80 text-sm transition-colors group-hover:bg-background"
+            size="sm"
+          >
+            <Link href={`/dashboard/projects/${project.id}`}>View tasks</Link>
+          </Button>
+        ) : (
+          <Button
+            variant="outline"
+            className="w-full border-border/70 bg-background/80 text-sm"
+            size="sm"
+            disabled
+            title="Only project owner and members can view tasks"
+          >
+            View tasks
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

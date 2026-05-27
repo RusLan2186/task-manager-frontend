@@ -12,6 +12,7 @@ export type Project = {
   description: string;
   createdAt: string;
   ownerId?: number;
+  canAccessTasks?: boolean;
   owner: { name: string } | null;
 };
 
