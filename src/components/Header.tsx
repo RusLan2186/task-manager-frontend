@@ -1,23 +1,24 @@
+"use client";
+
 import Link from "next/link";
 import { Navigation } from "./Navigation";
 import Image from "next/image";
 import { Container } from "./Container";
-
+import { MobileMenu } from "./MobileMenu";
 
 export const Header = () => {
   return (
     <div>
-
       <Container>
-      <div className="flex justify-between items-center">
-        <Link className="text-green-600 font-bold" href="/">
-          <Image src="/logo.png" alt="Logo" width={60} height={60} />
-        </Link>
+        <div className="flex justify-between gap-x-6 items-center">
+          <Image src="/logo.png" alt="Logo" width={100} height={100} />
 
-        <div>
-          <Navigation />
+          <div className="hidden md:block">
+            <Navigation />
+          </div>
+
+          <MobileMenu />
         </div>
-      </div>
       </Container>
     </div>
   );

@@ -42,7 +42,7 @@ export default function AdminUsersPage() {
     <div>
       <Title className="mb-5" text="Users" size="xl" />
 
-      <div className="mb-5 w-1/3">
+      <div className="mb-5 w-full md:w-1/3">
         <Input
           type="text"
           placeholder="Search"

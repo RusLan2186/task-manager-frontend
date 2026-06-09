@@ -75,7 +75,7 @@ export default function DashboardPage() {
     return (
       <div className="space-y-8">
         <div>
-          <Title text="My projects" size="xl" />
+          <Title text="My projects" size="xl" className="text-2xl sm:text-4xl" />
           <p className="text-muted-foreground mt-2">Loading...</p>
         </div>
       </div>
@@ -113,7 +113,11 @@ export default function DashboardPage() {
     <div className="space-y-8">
       <section className="rounded-2xl border border-border/70 bg-card/80 p-5 shadow-sm backdrop-blur sm:p-6">
         <div className="space-y-2">
-          <Title text="My projects" size="xl" className="text-balance" />
+          <Title
+            text="My projects"
+            size="xl"
+            className="text-balance text-2xl sm:text-4xl"
+          />
           {user && (
             <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
               <p>

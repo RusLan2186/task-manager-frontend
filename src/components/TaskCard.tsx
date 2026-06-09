@@ -29,7 +29,7 @@ export const TaskCard: React.FC<Props> = ({
     ? "cursor-grabbing border-primary/45 bg-card/95 shadow-2xl ring-1 ring-primary/25"
     : isDragging
       ? "cursor-grabbing opacity-25"
-      : "cursor-grab hover:-translate-y-0.5 hover:shadow-lg active:cursor-grabbing";
+      : "cursor-grab touch-none hover:-translate-y-0.5 hover:shadow-lg active:cursor-grabbing";
 
   const priorityClass = {
     HIGH: "bg-rose-100 text-rose-700 border-rose-200",

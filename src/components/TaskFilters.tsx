@@ -26,12 +26,12 @@ export const TaskFilters: React.FC<Props> = ({
   sortValue,
 }) => {
   return (
-    <div className="flex flex-wrap items-center justify-end gap-3">
+    <div className="grid w-full grid-cols-1 gap-3 md:w-auto md:grid-cols-3">
       <Select
         value={priorityValue}
         onValueChange={(value) => handleFilterChange("priority", value)}
       >
-        <SelectTrigger className="w-52 bg-background/80">
+        <SelectTrigger className="w-full bg-background/80 md:w-52">
           <span className="text-muted-foreground mr-2">Priority:</span>
           <SelectValue placeholder="ALL" />
         </SelectTrigger>
@@ -50,7 +50,7 @@ export const TaskFilters: React.FC<Props> = ({
         value={assigneeIdValue}
         onValueChange={(value) => handleFilterChange("assigneeId", value)}
       >
-        <SelectTrigger className="w-52 bg-background/80">
+        <SelectTrigger className="w-full bg-background/80 md:w-52">
           <span className="text-muted-foreground mr-2">Assignee:</span>
           <SelectValue placeholder="ALL" />
         </SelectTrigger>
@@ -71,7 +71,7 @@ export const TaskFilters: React.FC<Props> = ({
         value={sortValue}
         onValueChange={(value) => handleFilterChange("sort", value)}
       >
-        <SelectTrigger className="w-52 bg-background/80">
+        <SelectTrigger className="w-full bg-background/80 md:w-52">
           <span className="text-muted-foreground mr-2">Sort by:</span>
           <SelectValue placeholder="ALL" />
         </SelectTrigger>

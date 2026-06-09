@@ -30,9 +30,9 @@ const highlights = [
 ];
 
 const demoTasks = [
-  { title: "Prepare release", status: "In progress", priority: "High" },
-  { title: "Review bug reports", status: "To do", priority: "Medium" },
-  { title: "Client sync meeting", status: "Done", priority: "Low" },
+  { title: "Finalize onboarding flow", status: "In review", priority: "High" },
+  { title: "Update pricing page copy", status: "Planned", priority: "Medium" },
+  { title: "QA checkout scenarios", status: "Blocked", priority: "High" },
 ];
 
 export default function Home() {
@@ -71,9 +71,6 @@ export default function Home() {
               <Button asChild variant="outline" size="lg" className="px-5">
                 <Link href="/login">Sign in</Link>
               </Button>
-              <Button asChild variant="ghost" size="lg" className="px-4">
-                <Link href="/dashboard">Open dashboard</Link>
-              </Button>
             </div>
 
             <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
@@ -97,11 +94,11 @@ export default function Home() {
               <div className="flex items-center justify-between rounded-xl border border-border/70 bg-card/80 px-4 py-3">
                 <div>
                   <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                    Active sprint
+                    Product launch
                   </p>
-                  <p className="text-sm font-medium">Website Redesign</p>
+                  <p className="text-sm font-medium">Growth sprint 2.1</p>
                 </div>
-                <Badge>12 tasks</Badge>
+                <Badge>8 tasks</Badge>
               </div>
 
               <div className="space-y-2.5">
