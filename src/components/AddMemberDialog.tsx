@@ -24,9 +24,11 @@ import { Trash2 } from "lucide-react";
 export const AddMemberDialog = ({
   projectId,
   onMemberAdded,
+  triggerClassName,
 }: {
   projectId: number;
   onMemberAdded: () => void;
+  triggerClassName?: string;
 }) => {
   const { users, isLoading, error, refetchUsers } =
     useProjectAssignableUsers(projectId);
@@ -55,7 +57,9 @@ export const AddMemberDialog = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Manage Members</Button>
+        <Button variant="outline" className={triggerClassName}>
+          Manage Members
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -95,11 +99,17 @@ export const AddMemberDialog = ({
 
         {error && <p className="text-sm text-red-500">{error}</p>}
 
-        <ul className="flex flex-col gap-2" >
+        <ul className="flex flex-col gap-2">
           {members.map((member) => (
             <li key={member.id} className="flex justify-between">
               {member.name}
-              <Trash2 className="cursor-pointer" size={18} onClick={() => handleRemove(member.id)}>Remove</Trash2>
+              <Trash2
+                className="cursor-pointer"
+                size={18}
+                onClick={() => handleRemove(member.id)}
+              >
+                Remove
+              </Trash2>
             </li>
           ))}
         </ul>

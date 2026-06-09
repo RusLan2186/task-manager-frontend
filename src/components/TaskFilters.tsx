@@ -32,8 +32,12 @@ export const TaskFilters: React.FC<Props> = ({
         onValueChange={(value) => handleFilterChange("priority", value)}
       >
         <SelectTrigger className="w-full bg-background/80 md:w-52">
-          <span className="text-muted-foreground mr-2">Priority:</span>
-          <SelectValue placeholder="ALL" />
+          <div className="flex min-w-0 flex-1 items-center gap-2">
+            <span className="text-muted-foreground">Priority:</span>
+            <span className="ml-auto text-right">
+              <SelectValue placeholder="ALL" />
+            </span>
+          </div>
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
@@ -51,8 +55,12 @@ export const TaskFilters: React.FC<Props> = ({
         onValueChange={(value) => handleFilterChange("assigneeId", value)}
       >
         <SelectTrigger className="w-full bg-background/80 md:w-52">
-          <span className="text-muted-foreground mr-2">Assignee:</span>
-          <SelectValue placeholder="ALL" />
+          <div className="flex min-w-0 flex-1 items-center gap-2">
+            <span className="text-muted-foreground">Assignee:</span>
+            <span className="ml-auto text-right">
+              <SelectValue placeholder="ALL" />
+            </span>
+          </div>
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
@@ -72,8 +80,12 @@ export const TaskFilters: React.FC<Props> = ({
         onValueChange={(value) => handleFilterChange("sort", value)}
       >
         <SelectTrigger className="w-full bg-background/80 md:w-52">
-          <span className="text-muted-foreground mr-2">Sort by:</span>
-          <SelectValue placeholder="ALL" />
+          <div className="flex min-w-0 flex-1 items-center gap-2">
+            <span className="text-muted-foreground">Sort by:</span>
+            <span className="ml-auto text-right">
+              <SelectValue placeholder="ALL" />
+            </span>
+          </div>
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

@@ -28,12 +28,14 @@ interface Props {
   projectId: string;
   onTaskCreated: () => void;
   users: User[];
+  triggerClassName?: string;
 }
 
 export const CreateTaskDialog: React.FC<Props> = ({
   projectId,
   onTaskCreated,
   users,
+  triggerClassName,
 }) => {
   const [open, setOpen] = React.useState(false);
   const {
@@ -87,7 +89,9 @@ export const CreateTaskDialog: React.FC<Props> = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="default">Create Task</Button>
+        <Button variant="default" className={triggerClassName}>
+          Create Task
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-md">

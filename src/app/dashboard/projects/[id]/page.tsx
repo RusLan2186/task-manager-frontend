@@ -62,6 +62,7 @@ export default function ProjectPage() {
     searchParams.get("assigneeId") ||
     searchParams.get("sort"),
   );
+  const isProjectOwner = user?.id === project?.ownerId;
   const hasSearchQuery = Boolean(searchParams.get("search"));
   const showSearchInput = tasks.length > 0 || hasSearchQuery;
 
@@ -83,25 +84,33 @@ export default function ProjectPage() {
 
   return (
     <div className="space-y-8">
-      {user?.id === project?.ownerId && (
-        <AddMemberDialog
-          projectId={Number(projectId)}
-          onMemberAdded={fetchMembers}
-        />
-      )}
-
       <section className="rounded-2xl border border-border/70 bg-card/80 p-5 shadow-sm backdrop-blur sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Title
             text={project?.title || `Project ${projectId}`}
             size="lg"
-            className="text-balance text-2xl sm:text-3xl"
+            className="text-balance text-xl sm:text-3xl"
           />
-          <CreateTaskDialog
-            projectId={projectId}
-            onTaskCreated={fetchTasks}
-            users={members}
-          />
+
+          <div className="flex w-full items-center gap-3 max-[500px]:flex-col sm:w-auto sm:flex-wrap sm:justify-end">
+            {isProjectOwner && (
+              <div className="min-w-0 flex-1 max-[500px]:w-full max-[500px]:flex-none sm:flex-none">
+                <AddMemberDialog
+                  projectId={Number(projectId)}
+                  onMemberAdded={fetchMembers}
+                  triggerClassName="w-full"
+                />
+              </div>
+            )}
+            <div className="min-w-0 flex-1 max-[500px]:w-full max-[500px]:flex-none sm:flex-none">
+              <CreateTaskDialog
+                projectId={projectId}
+                onTaskCreated={fetchTasks}
+                users={members}
+                triggerClassName="w-full"
+              />
+            </div>
+          </div>
         </div>
       </section>
 

@@ -148,8 +148,12 @@ function Dashboard() {
         <div className="flex items-center justify-end gap-3">
           <Select value={sort || "ALL"} onValueChange={handleSortChange}>
             <SelectTrigger className="w-52 bg-background/80">
-              <span className="text-muted-foreground mr-2">Sort by:</span>
-              <SelectValue placeholder="Sort By" />
+              <div className="flex min-w-0 flex-1 items-center gap-2">
+                <span className="text-muted-foreground">Sort by:</span>
+                <span className="ml-auto text-right">
+                  <SelectValue placeholder="Sort By" />
+                </span>
+              </div>
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
