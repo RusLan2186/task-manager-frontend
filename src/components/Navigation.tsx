@@ -4,6 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui";
+import { LogIn, LogOut, User, UserPlus } from "lucide-react";
 
 type NavigationProps = {
   isMobile?: boolean;
@@ -23,12 +24,13 @@ export const Navigation = ({
   };
 
   const layoutClassName = isMobile
-    ? "flex flex-col items-start gap-5"
+    ? "flex flex-col items-start gap-7"
     : "flex items-center flex-wrap gap-x-10";
 
   const baseLinkClassName = isMobile
     ? "font-bold text-lg leading-none transition-colors"
     : "font-bold transition-colors";
+  const linkWithIconClassName = "inline-flex items-center gap-2";
 
   const getLinkClassName = (href: string) => {
     const isDashboard = href === "/dashboard";
@@ -65,31 +67,37 @@ export const Navigation = ({
               Admin
             </Link>
           )}
-          <h3 className={userClassName}>{user.name}</h3>
+          <h3 className={`${userClassName} inline-flex items-center gap-2`}>
+            <User className="size-4" />
+            {user.name}
+          </h3>
 
           <Button
             onClick={handleLogout}
             variant="outline"
             size={logoutButtonSize}
           >
+            <LogOut className="size-4" />
             Logout
           </Button>
         </>
       ) : (
         <>
           <Link
-            className={getLinkClassName("/login")}
+            className={`${getLinkClassName("/login")} ${linkWithIconClassName}`}
             href="/login"
             onClick={onNavigate}
           >
+            <LogIn className="size-4" />
             Login
           </Link>
 
           <Link
-            className={getLinkClassName("/register")}
+            className={`${getLinkClassName("/register")} ${linkWithIconClassName}`}
             href="/register"
             onClick={onNavigate}
           >
+            <UserPlus className="size-4" />
             Register
           </Link>
         </>

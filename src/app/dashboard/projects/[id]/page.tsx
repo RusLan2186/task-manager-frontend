@@ -90,14 +90,12 @@ export default function ProjectPage() {
         />
       )}
 
- 
-
       <section className="rounded-2xl border border-border/70 bg-card/80 p-5 shadow-sm backdrop-blur sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Title
-            text={`Project ${projectId}`}
+            text={project?.title || `Project ${projectId}`}
             size="lg"
-            className="text-balance"
+            className="text-balance text-2xl sm:text-3xl"
           />
           <CreateTaskDialog
             projectId={projectId}

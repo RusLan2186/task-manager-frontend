@@ -71,11 +71,13 @@ export const TaskDrawer: React.FC<Props> = ({
 
   return (
     <Sheet open={open} onOpenChange={onClose}>
-      <SheetContent className="w-full border-l-border/60 bg-background/95 sm:max-w-xl">
+      <SheetContent className="border-l-border/60 bg-background/95 data-[side=right]:w-full sm:max-w-xl">
         <SheetHeader>
-          <SheetTitle className="flex items-center gap-2 text-xl font-bold">
-            <ListChecks className="w-5 h-5 text-primary" />
-            {task.title}
+          <SheetTitle className="flex items-start gap-2 pr-10 text-lg leading-tight font-bold sm:text-xl">
+            <ListChecks className="w-5 h-5 shrink-0 text-primary" />
+            <span className="min-w-0 break-all sm:wrap-break-word">
+              {task.title}
+            </span>
           </SheetTitle>
           <SheetDescription className="mt-2 text-base">
             {task.description || (
