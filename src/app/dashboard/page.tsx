@@ -21,7 +21,6 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 
-
 export default function DashboardPage() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -30,7 +29,7 @@ export default function DashboardPage() {
   );
 }
 
- function Dashboard() {
+function Dashboard() {
   const { user, isLoading } = useAuth();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -75,7 +74,11 @@ export default function DashboardPage() {
     return (
       <div className="space-y-8">
         <div>
-          <Title text="My projects" size="xl" className="text-2xl sm:text-4xl" />
+          <Title
+            text="My projects"
+            size="xl"
+            className="text-2xl sm:text-4xl"
+          />
           <p className="text-muted-foreground mt-2">Loading...</p>
         </div>
       </div>

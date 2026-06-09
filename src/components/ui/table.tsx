@@ -15,10 +15,18 @@ export function Table({ users, className }: TableProps) {
       <table className="w-full min-w-170 text-sm">
         <thead className="bg-muted/40">
           <tr className="border-b">
-            <th className="h-10 px-4 text-left font-medium whitespace-nowrap">Name</th>
-            <th className="h-10 px-4 text-left font-medium whitespace-nowrap">Email</th>
-            <th className="h-10 px-4 text-left font-medium whitespace-nowrap">Role</th>
-            <th className="h-10 px-4 text-left font-medium whitespace-nowrap">Created At</th>
+            <th className="h-10 px-4 text-left font-medium whitespace-nowrap">
+              Name
+            </th>
+            <th className="h-10 px-4 text-left font-medium whitespace-nowrap">
+              Email
+            </th>
+            <th className="h-10 px-4 text-left font-medium whitespace-nowrap">
+              Role
+            </th>
+            <th className="h-10 px-4 text-left font-medium whitespace-nowrap">
+              Created At
+            </th>
           </tr>
         </thead>
         <tbody>
